@@ -107,6 +107,7 @@ class MyServer(BaseHTTPRequestHandler):
 					self.send_response(200)
 					self.end_headers()
 					self.wfile.write(bytes('{"error":"Uploaded image should be smaller than 300 x 300 px"}',"utf-8"));
+					return
 			else :
 				if form.getfirst("ti") in ['strebelle']:
 					im = imageio.imread("Strebelle.png");
