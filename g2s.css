@@ -75,13 +75,14 @@ input#width{
 	display: inline-block;
 } 
 
-.imageBlock > div > div{
+#progressBar{
 	height: 100%;
+	display: flex;
 }
 
-.imageBlock > div > div > svg{
-	max-height: 100%;
-	display: block;
+#progressBar > svg{
+	height: 100%;
+	width: 100%;
 }
 
 div.oneImage{
