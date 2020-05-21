@@ -3,7 +3,7 @@
 	--main-ft-color: black; 
 }
 
-@media (prefers-dark-interface) { 
+@media (prefers-color-scheme: dark) { 
   :root {
 		--main-bg-color: black; 
 		--main-ft-color: white; 
