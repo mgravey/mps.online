@@ -1,6 +1,6 @@
 var jobId=0;
 var waitingList=0;
-var updateDelay=300;
+var updateDelay=1000;
 
 function init(){
 	$('#height').val(200);
@@ -69,7 +69,7 @@ function updateProgression(){
 			progress=data.progress;
 			//waitingList=data.WL;
 			if ('sim' in data){
-				dur=((new Date().getTime())-startTime)/progress*(1-progress)+500;
+				dur=updateDelay*1.5;//((new Date().getTime())-startTime)/progress*(1-progress)*1.5;
 				animationS.animate(1.0,{duration: dur},function(){
 					$('#progressBar').hide();
 					$('#simDisplay').attr('src','data:image/png;base64, '+data.sim);
