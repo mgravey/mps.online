@@ -69,7 +69,7 @@ function updateProgression(){
 			progress=data.progress;
 			//waitingList=data.WL;
 			if ('sim' in data){
-				dur=((new Date().getTime())-startTime)/progress*(1-progress);
+				dur=((new Date().getTime())-startTime)/progress*(1-progress)+500;
 				animationS.animate(1.0,{duration: dur},function(){
 					$('#progressBar').hide();
 					$('#simDisplay').attr('src','data:image/png;base64, '+data.sim);
