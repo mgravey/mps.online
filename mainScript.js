@@ -65,7 +65,6 @@ function updateProgression(){
 		url: 'qsStatusOrResult',
 		data: value,
 		success: function(data){
-			console.log(data);
 			data=JSON.parse(data);
 			progress=data.progress;
 			//waitingList=data.WL;
@@ -106,9 +105,11 @@ function runSimulation(){
 		processData: false,
 		contentType: false,
 		success: function(data){
-			console.log(data);
 			data=JSON.parse(data);
-			console.log(data);
+			if(data.hasOwnProperty('error')){
+				alert(data.error);
+				return;
+			}
 			jobId=data.jobId;
 			waitingList=data.WL;
 			startTime=new Date().getTime();
