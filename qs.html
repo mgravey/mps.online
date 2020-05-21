@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simulation QS</title>
+	<link rel="stylesheet" type="text/css" href="g2s.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="progressbar.min.js"></script>
+	<script src="mainScript.js"></script>
+</head>
+<body>
+	<div class="selectMode">
+
+	</div>
+	<div class="mainClass">
+		<div class="simple">
+			<form onSubmit="return runSimulation()" enctype="multipart/form-data">
+				<h3>Training image</h3>
+				<div class="selectTi">
+					<div class="oneImage">
+						<label class="imageRadio" for="strebelle" style="background-image:url('Strebelle.png')"></label>
+						<input type="radio" id="strebelle" name="ti" value="strebelle" required>
+					</div>
+					<div class="oneImage">
+						<label class="imageRadio" for="stone" style="background-image:url('Stone.png')"></label>
+						<input type="radio" id="stone" name="ti" value="stone" required>
+					</div>
+					<div class="oneImage">
+						<input class="imageRadio" type="file" id="file-ti" name="ti" accept="image/png, image/jpeg">
+						<input type="radio" id="external-ti" name="ti" value="file" required>
+					</div>			
+				</div>
+				<h3>Size of the simulation grid</h3>
+				<div class="imageBlock" >
+					<input type="range" min="25" max="500" value="500" class="slider" name='h' orient="vertical" id="height" required>
+					<div id=imageSizeVisualize style="height:200px;width:200px">
+						<div id='progressBar' style="/*display: table-caption;*/">
+							<svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="-10 -10 100 75">
+								<path fill-opacity="0" stroke-width="1" stroke="#bbb" lass="letter-Q" d="M43.38,56.43c-6.55-1.73-12.96-3.67-18.58-5.62c-1.01-0.36-2.02-0.72-2.95-0.72C10.33,49.66,0.47,41.16,0.47,25.54c0-15.55,9.5-25.56,22.61-25.56c13.18,0,21.75,10.22,21.75,24.55c0,12.46-5.76,20.45-13.83,23.26v0.29c4.82,1.22,10.08,2.38,14.19,3.1L43.38,56.43z M38.2,24.82c0-9.72-5.04-19.73-15.34-19.73c-10.58,0-15.77,9.79-15.7,20.31c-0.07,10.3,5.62,19.59,15.41,19.59C32.58,44.98,38.2,35.91,38.2,24.82z"/>
+								<path id="fill-Q" class="letter-Q" fill-opacity="0" stroke-width="3" stroke="#00FF" d="M43.38,56.43c-6.55-1.73-12.96-3.67-18.58-5.62c-1.01-0.36-2.02-0.72-2.95-0.72C10.33,49.66,0.47,41.16,0.47,25.54c0-15.55,9.5-25.56,22.61-25.56c13.18,0,21.75,10.22,21.75,24.55c0,12.46-5.76,20.45-13.83,23.26v0.29c4.82,1.22,10.08,2.38,14.19,3.1L43.38,56.43z M38.2,24.82c0-9.72-5.04-19.73-15.34-19.73c-10.58,0-15.77,9.79-15.7,20.31c-0.07,10.3,5.62,19.59,15.41,19.59C32.58,44.98,38.2,35.91,38.2,24.82z"/>
+								<path fill-opacity="0" stroke-width="1" stroke="#bbb" class="letter-S" d="M52.09,41.67c2.81,1.73,6.91,3.17,11.23,3.17c6.41,0,10.15-3.38,10.15-8.28c0-4.54-2.59-7.13-9.14-9.65c-7.92-2.81-12.82-6.91-12.82-13.75c0-7.56,6.26-13.18,15.7-13.18c4.97,0,8.57,1.15,10.73,2.38l-1.73,5.11c-1.58-0.86-4.82-2.3-9.22-2.3c-6.62,0-9.14,3.96-9.14,7.27c0,4.54,2.95,6.77,9.65,9.36c8.21,3.17,12.39,7.13,12.39,14.26c0,7.49-5.54,13.97-16.99,13.97c-4.68,0-9.79-1.37-12.38-3.1L52.09,41.67z"/>
+								<path id="fill-S" class="letter-S" fill-opacity="0" stroke-width="3" stroke="#FF0000" d="M52.09,41.67c2.81,1.73,6.91,3.17,11.23,3.17c6.41,0,10.15-3.38,10.15-8.28c0-4.54-2.59-7.13-9.14-9.65c-7.92-2.81-12.82-6.91-12.82-13.75c0-7.56,6.26-13.18,15.7-13.18c4.97,0,8.57,1.15,10.73,2.38l-1.73,5.11c-1.58-0.86-4.82-2.3-9.22-2.3c-6.62,0-9.14,3.96-9.14,7.27c0,4.54,2.95,6.77,9.65,9.36c8.21,3.17,12.39,7.13,12.39,14.26c0,7.49-5.54,13.97-16.99,13.97c-4.68,0-9.79-1.37-12.38-3.1L52.09,41.67z"/>
+							</svg>
+						</div>
+						<img id='simDisplay' src="">
+					</div>
+					<br>
+					<input type="range" min="25" max="500" value="200" class="slider" name='w' id="width" required><br>
+					<label id='simSizeDisplay'></label>
+				</div>
+				<h3>Algorithmic parameter</h3>
+				<label style="width:200px">n:</label>
+				<input type="range" min="1" max="100" value="50" class="slider" name='n' id="numberOfNeighbors" required style="width:250px">
+				<label style="width:200px">Number of neighbors:</label><label id="numberOfNeighborsValue"></label>
+				<br>
+				<label style="width:200px">k:</label>
+				<input type="range" min="0" max="2" value="0.2" steps class="slider" name='k' id="numberOfCandidates" required style="width:250px" step=0.01>
+				<label style="width:200px">Number of candidates:</label><label id="numberOfCandidatesValue"></label>
+				<br>
+				<label style="width:200px">s:</label>
+				<input type="number" min="1" name='k' id="seed" required style="width:250px">
+				<label style="width:200px">Seed</label>
+				<br>
+				<input type="submit" value="Run"><br>
+				<div class="emailBox">
+					E-mail address (if you prefer to get the result by e-mail):<br>
+					<input type="text" name="emailAddress" id='emailAddress' style="width:270px" ><br>
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+		</div>
+		<div class="normal">
+
+		</div>
+		<div class="expert">
+
+		</div>
+	</div>
+</body>
+</html>

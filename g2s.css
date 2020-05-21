@@ -1,0 +1,105 @@
+:root {
+	--main-bg-color: white; 
+	--main-ft-color: black; 
+}
+
+@media (prefers-dark-interface) { 
+  :root {
+		--main-bg-color: black; 
+		--main-ft-color: white; 
+	}
+}
+
+html{
+	color: var(--main-ft-color);
+	background-color: var(--main-bg-color);
+}
+
+
+div.mainClass
+{
+
+}
+
+div.simple
+{
+
+}
+
+div.normal
+{
+
+}
+
+div.expert
+{
+
+}
+
+div.selectMode
+{
+
+}
+
+input#height[type=range][orient=vertical]
+{
+	width: 20px;
+	height: 490px;
+	padding-bottom: 20px;
+	writing-mode: bt-lr; /* IE */
+	-webkit-appearance: slider-vertical; /* WebKit */
+}
+
+input#width{
+	width: 490px;
+	height: 20px;
+	padding-left: 20px;
+	margin-left: 30px;
+}
+
+.imageRadio{
+	display: block;
+	width:150px;
+	height:150px;
+	background-size: 150px;
+}
+
+#imageSizeVisualize{
+	border-style: dotted;
+}
+
+.imageBlock{
+	display:inline;
+}
+.imageBlock > input,.imageBlock > div{
+	display: inline-block;
+} 
+
+.imageBlock > div > div{
+	height: 100%;
+}
+
+.imageBlock > div > div > svg{
+	max-height: 100%;
+	display: block;
+}
+
+div.oneImage{
+	padding: 5px;
+	text-align: center;
+}
+
+div.selectTi{
+	display: flex;
+}
+
+.tryAgain div{
+	padding-top: calc( ( 100vh - 3em )/2 );
+	text-align: center;
+    vertical-align: middle;
+	font-size: 5em;
+}
+
+.emailBox{
+	display:none;
+}
