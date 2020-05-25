@@ -61,14 +61,14 @@ div.selectMode
 input#height[type=range][orient=vertical]
 {
 	width: 20px;
-	height: 490px;
+	height: 510px;
 	padding-bottom: 20px;
 	writing-mode: bt-lr; 
 	-webkit-appearance: slider-vertical;
 }
 
 input#width{
-	width: 490px;
+	width: 510px;
 	height: 20px;
 	padding-left: 20px;
 	margin-left: 30px;
