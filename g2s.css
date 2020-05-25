@@ -14,8 +14,25 @@ html{
 	color: var(--main-ft-color);
 	background-color: var(--main-bg-color);
 }
-
-
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+[type=radio]:checked + .oneImage {
+    outline: 2px solid #f00;
+}
+[type=radio] + .oneImage {
+    cursor: pointer;
+}
+.oneImage{
+	height: 200px;
+	padding:10px;
+}
+img{
+	height: 100%;
+}
 div.mainClass
 {
 
@@ -46,8 +63,8 @@ input#height[type=range][orient=vertical]
 	width: 20px;
 	height: 490px;
 	padding-bottom: 20px;
-	writing-mode: bt-lr; /* IE */
-	-webkit-appearance: slider-vertical; /* WebKit */
+	writing-mode: bt-lr; 
+	-webkit-appearance: slider-vertical;
 }
 
 input#width{
@@ -56,15 +73,16 @@ input#width{
 	padding-left: 20px;
 	margin-left: 30px;
 }
-
+/*
 .imageRadio{
 	display: block;
 	width:150px;
 	height:150px;
 	background-size: 150px;
 }
-
+*/
 #imageSizeVisualize{
+	display: inline-block;
 	border-style: dotted;
 }
 
@@ -84,7 +102,7 @@ input#width{
 	height: 100%;
 	width: 100%;
 }
-
+/*
 div.oneImage{
 	padding: 5px;
 	text-align: center;
@@ -93,6 +111,7 @@ div.oneImage{
 div.selectTi{
 	display: flex;
 }
+*/
 
 .tryAgain div{
 	padding-top: calc( ( 100vh - 3em )/2 );

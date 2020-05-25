@@ -42,7 +42,7 @@ $( document ).ready(function(){
 	$('#numberOfCandidates').on('input change',function(){
 		$('#numberOfCandidatesValue').html(Math.round(Math.exp($(this).val())*100)/100);
 	})
-	$('#external-ti').on('change',function(){
+	$('input[type="radio"]').on('change',function(){
 		$('#file-ti').prop('required',$('#external-ti').prop('checked'));
 	})
 	init();
