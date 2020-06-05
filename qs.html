@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html class="bg-light">
 <head>
 	<title>Simulation QS</title>
-	<link rel="stylesheet" type="text/css" href="g2s.css">
+	
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<sript src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></sript>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="progressbar.min.js"></script>
 	<script src="mainScript.js"></script>
+	<link rel="stylesheet" type="text/css" href="g2s.css">
 </head>
 <body class="bg-light">
 	<div class="container">
 		<div class="py-5 text-center">
-			<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-			<h2>Q2S</h2>
+<!-- 			<img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+			<h2 class="title">G2S: The GeoStatistical Server</h2>
 			<p class="lead">A flexible MPS framework.</p>
 		</div>
 		<div class="row">
 			<div class="col">
+				<h3 class='title'>QS interactive demonstration</h3>
 				<form onSubmit="return runSimulation()" enctype="multipart/form-data">
 					
 					<h4 class="mb-3">Training image</h4>
@@ -64,7 +66,7 @@
 									</div>
 									<img id='simDisplay' src="">
 								</div>
-								<input type="range" min="25" max="500" value="200" class="form-control-range" name='w' id="width" required><br>
+								<input type="range" min="25" max="500" value="200" class="slider" name='w' id="width" required><br>
 							</div>
 							<div class="col">
 								<label id='simSizeDisplay'></label>
@@ -100,13 +102,13 @@
 				</form>
 			</div>
 		</div>
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">© 2017-2018 Company Name</p>
-			<ul class="list-inline">
+		<footer class="my-5 pt-5 text-muted text-center text-small">	
+			<p class="mb-1">2020 Mathieu Gravey</p>
+			<!-- <ul class="list-inline">
 				<li class="list-inline-item"><a href="#">Privacy</a></li>
 				<li class="list-inline-item"><a href="#">Terms</a></li>
 				<li class="list-inline-item"><a href="#">Support</a></li>
-			</ul>
+			</ul> -->
 		</footer>
 	</div>
 	

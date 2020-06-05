@@ -1,19 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Architects+Daughter");
+
 :root {
-	--main-bg-color: white; 
-	--main-ft-color: black; 
+	--main-bg-color: var(--light); 
+	--main-ft-color: var(--dark); 
 }
 
-@media (prefers-color-scheme: dark) { 
+@media (prefers-color-scheme: dark) {
   :root {
-		--main-bg-color: black; 
-		--main-ft-color: white; 
+		--main-bg-color: var(--dark); 
+		--main-ft-color: var(--light); 
 	}
 }
 
-html{
-	color: var(--main-ft-color);
-	background-color: var(--main-bg-color);
+html.bg-light, div.bg-light, .bg-light {
+    color: var(--main-ft-color);
+	background-color: var(--main-bg-color)!important;
 }
+
 [type=radio] {
     position: absolute;
     opacity: 0;
@@ -63,7 +66,6 @@ input#height[type=range][orient=vertical]
 	width: 20px;
 	height: 510px;
 	padding-bottom: 20px;
-	writing-mode: bt-lr; 
 	-webkit-appearance: slider-vertical;
 }
 
@@ -72,6 +74,7 @@ input#width{
 	height: 20px;
 	padding-left: 20px;
 	margin-left: 30px;
+	display: block;
 }
 /*
 .imageRadio{
@@ -122,4 +125,12 @@ div.selectTi{
 
 .emailBox{
 	display:none;
+}
+
+h2.title{
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+}
+
+h3.title{
+	font-weight: bold;
 }
