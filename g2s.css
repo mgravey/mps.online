@@ -135,3 +135,7 @@ h3.title{
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+#simDisplay{
+	display: block;
+}
