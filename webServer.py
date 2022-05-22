@@ -28,6 +28,11 @@ q = Queue(maxsize=0)
 num_theads = 1;
 
 class MyServer(BaseHTTPRequestHandler):
+
+	def end_headers (self):
+		self.send_header('Access-Control-Allow-Origin', '*')
+		BaseHTTPRequestHandler.end_headers(self)
+
 	def do_GET(self):
 
 		if 'limit=off' in self.path:
@@ -101,7 +106,7 @@ class MyServer(BaseHTTPRequestHandler):
 			im=None;
 			dt=None;
 			if form.getfirst("ti")=='file':
-				im = imageio.imread(form["uploadedImage"].file.read());
+				im = imageio.v3.imread(form["uploadedImage"].file.read());
 				dt=numpy.zeros(shape=(im.shape[2] if im.ndim>2 else 1 ,1));
 				if im.shape[0]>300 or im.shape[1]>300:
 					self.send_response(200)
@@ -110,17 +115,17 @@ class MyServer(BaseHTTPRequestHandler):
 					return
 			else :
 				if form.getfirst("ti") in ['strebelle']:
-					im = imageio.imread("Strebelle.png");
-					dt = numpy.ones(shape=(1,1));
+					im = imageio.v3.imread("Strebelle.png");
+					dt = numpy.zeros(shape=(1,1));
 				if form.getfirst("ti") in ['stone']:
-					im = imageio.imread("Stone.png");
+					im = imageio.v3.imread("Stone.png");
 					dt = numpy.zeros(shape=(1,1));
 
 			idValue=-2 ;
 			if im is not None :
 				target=numpy.nan*numpy.empty((int(form.getfirst("h")),int(form.getfirst("w")),im.shape[2]) if im.ndim>2 else (int(form.getfirst("h")),int(form.getfirst("w"))));
 				kernel=numpy.zeros(shape=(51,51))
-				idValue=g2s('-sa',serverAddress,'-a','qs','-ti',im,'-di',target,'-dt',dt,'-ki',kernel,'-k',float(form.getfirst("k")),'-n',int(form.getfirst("n")),'-s',int(form.getfirst("s")),'-submitOnly');#,'-j',0.5
+				idValue=g2s('-sa',serverAddress,'-a','qs','-ti',im,'-di',target,'-dt',dt,'-k',float(form.getfirst("k")),'-ki',kernel,'-n',int(form.getfirst("n")),'-s',int(form.getfirst("s")),'-submitOnly');#,'-j',0.5
 
 			# isCategorical=False;
 			# if "iscategorical" in form:
@@ -154,6 +159,10 @@ class MyServer(BaseHTTPRequestHandler):
 			return
 
 myServer = HTTPServer((hostName, hostPort), MyServer)
+
+myServer.socket = ssl.wrap_socket (myServer.socket,
+        keyfile="../ssl/privkey.pem",
+        certfile='../ssl/fullchain.pem', server_side=True)
 print(time.asctime(), "Server Starts - %s:%s" % (hostName, hostPort))
 
 try:
