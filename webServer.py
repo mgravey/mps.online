@@ -20,7 +20,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 hostName = ""
-hostPort = 80
+hostPort = 29181
 serverAddress="localhost"
 
 q = Queue(maxsize=0)
@@ -119,7 +119,8 @@ class MyServer(BaseHTTPRequestHandler):
 			idValue=-2 ;
 			if im is not None :
 				target=numpy.nan*numpy.empty((int(form.getfirst("h")),int(form.getfirst("w")),im.shape[2]) if im.ndim>2 else (int(form.getfirst("h")),int(form.getfirst("w"))));
-				idValue=g2s('-sa',serverAddress,'-a','qs','-ti',im,'-di',target,'-dt',dt,'-k',float(form.getfirst("k")),'-n',int(form.getfirst("n")),'-s',int(form.getfirst("s")),'-submitOnly');#,'-j',0.5
+				kernel=numpy.zeros(shape=(51,51))
+				idValue=g2s('-sa',serverAddress,'-a','qs','-ti',im,'-di',target,'-dt',dt,'-ki',kernel,'-k',float(form.getfirst("k")),'-n',int(form.getfirst("n")),'-s',int(form.getfirst("s")),'-submitOnly');#,'-j',0.5
 
 			# isCategorical=False;
 			# if "iscategorical" in form:
@@ -142,13 +143,14 @@ class MyServer(BaseHTTPRequestHandler):
 			self.send_response(200)
 			self.end_headers()
 
-			if( type(progression) is tuple):
+			if( progression[0]>=99):
+				progression=g2s('-sa',serverAddress,'-waitAndDownload',int(jobId))
 				buffered = BytesIO()
 				Image.fromarray(progression[0].astype(numpy.uint8)).save(buffered, format="PNG");
 				encoded_string = base64.b64encode(buffered.getvalue());
 				self.wfile.write(bytes('{"WL":0,"progress":100,"sim":"'+encoded_string.decode("utf-8")+'"}',"utf-8"))
 			else:
-				self.wfile.write(bytes('{"WL":0,"progress":'+str(progression)+'}',"utf-8"))
+				self.wfile.write(bytes('{"WL":0,"progress":'+str(progression[0])+'}',"utf-8"))
 			return
 
 myServer = HTTPServer((hostName, hostPort), MyServer)

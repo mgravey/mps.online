@@ -1,6 +1,7 @@
 var jobId=0;
 var waitingList=0;
 var updateDelay=1000;
+var apppPath='http://qs-sim.mgravey.com:29181/'
 
 function init(){
 	$('#height').val(200);
@@ -9,8 +10,8 @@ function init(){
 	$('#imageSizeVisualize').width($('#width').val());
 	$('#numberOfNeighbors').val(50);
 	$('#numberOfNeighborsValue').html($('#numberOfNeighbors').val());
-	$('#numberOfCandidates').val(0.2);
-	$('#numberOfCandidatesValue').html(Math.round(Math.exp($('#numberOfCandidates').val())*100)/100);
+	$('#numberOfCandidates').val(1.2);
+	$('#numberOfCandidatesValue').html($('#numberOfCandidates').val());
 	$('#seed').val(Math.floor(Math.random()*4294967295+1));
 	simSizeDisplay();
 }
@@ -40,7 +41,7 @@ $( document ).ready(function(){
 		$('#numberOfNeighborsValue').html($(this).val());
 	})
 	$('#numberOfCandidates').on('input change',function(){
-		$('#numberOfCandidatesValue').html(Math.round(Math.exp($(this).val())*100)/100);
+		$('#numberOfCandidatesValue').html($(this).val());
 	})
 	$('input[type="radio"]').on('change',function(){
 		$('#file-ti').prop('required',$('#external-ti').prop('checked'));
@@ -92,7 +93,7 @@ function runSimulation(){
 	value.append('uploadedImage',$('#file-ti')[0].files[0]);
 	value.append('ti',$("input[name='ti']:checked").val());
 	value.append('n',$('#numberOfNeighbors').val()*1);
-	value.append('k',Math.round(Math.exp($('#numberOfCandidates').val())*100)/100);
+	value.append('k',$('#numberOfCandidates').val());
 	value.append('h',$('#height').val()*1);
 	value.append('w',$('#width').val()*1);
 	value.append('s',$('#seed').val()*1);
@@ -100,7 +101,7 @@ function runSimulation(){
 
 	$.ajax({
 		type: 'POST',
-		url: 'qsRun',
+		url: apppPath+'qsRun',
 		data: value,
 		processData: false,
 		contentType: false,
