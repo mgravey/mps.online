@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3.9
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 from os import curdir, sep
@@ -124,7 +124,7 @@ class MyServer(BaseHTTPRequestHandler):
 			idValue=-2 ;
 			if im is not None :
 				target=numpy.nan*numpy.empty((int(form.getfirst("h")),int(form.getfirst("w")),im.shape[2]) if im.ndim>2 else (int(form.getfirst("h")),int(form.getfirst("w"))));
-				kernel=numpy.zeros(shape=(51,51))
+				kernel=numpy.ones(shape=(51,51))
 				idValue=g2s('-sa',serverAddress,'-a','qs','-ti',im,'-di',target,'-dt',dt,'-k',float(form.getfirst("k")),'-ki',kernel,'-n',int(form.getfirst("n")),'-s',int(form.getfirst("s")),'-submitOnly');#,'-j',0.5
 
 			# isCategorical=False;
