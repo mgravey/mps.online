@@ -1,7 +1,7 @@
 var jobId=0;
 var waitingList=0;
 var updateDelay=1000;
-var apppPath='http://qs-sim.mgravey.com:29181/'
+var apppPath='https://qs-sim.mgravey.com:29181/'
 
 function init(){
 	$('#height').val(200);
@@ -63,7 +63,7 @@ function updateProgression(){
 
 	$.ajax({
 		type: 'POST',
-		url: 'qsStatusOrResult',
+		url: apppPath+'qsStatusOrResult',
 		data: value,
 		success: function(data){
 			data=JSON.parse(data);
