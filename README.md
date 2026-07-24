@@ -32,4 +32,17 @@ The in-page simulation uses the bundled Stone (200×200 continuous) or Strebelle
 
 Connect the static-site repository to Cloudflare Pages and publish the directory containing this README as the site root. Use no framework preset, no build command, and `.` as the output directory. The included `_headers` file enables the COOP/COEP headers required by the threaded Wasm bundle. No Pages Function, Worker, API token, environment variable, or service-worker workaround is required.
 
+## Cloudflare Workers Builds
+
+Cloudflare's newer Git setup may open a “Set up your application” screen with a required deploy command. Put this deployment package in the repository's `public/` directory and use:
+
+- project name: `mps-online`
+- build command: leave empty
+- deploy command: `npx wrangler deploy --assets ./public/`
+- builds for non-production branches: disabled initially
+- advanced path: `/`
+- environment variables: none
+
+Workers Static Assets parses the included `public/_headers` file, so the threaded Wasm build receives the same COOP/COEP headers without a Worker script or service-worker workaround.
+
 Keep only one preview tab active when using Python or MATLAB; the page now warns and stands down in duplicate tabs so one command cannot be claimed twice.
