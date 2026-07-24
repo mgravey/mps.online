@@ -24,9 +24,11 @@ Serve the site over HTTPS in production. The page must send:
 
 For local testing, use `python3 browser/serve.py`; it now serves both IPv4 and IPv6 localhost so a generic `python -m http.server` cannot silently shadow the page. Stop any older listener on port 8000 before starting it again.
 
-The page CSP must allow `http://127.0.0.1:8129` in `connect-src`. Configure Python/MATLAB with the exact deployed origin using `-browserOrigin`; do not use wildcard CORS. The existing Python and MATLAB interfaces remain compatible with `-sa browser`, normal `-j`, progress, cancellation, and the finite communication timeout.
+The page CSP must allow `http://127.0.0.1:8129` in `connect-src`. Browser mode accepts hosted pages by default; `-browserOrigin` remains available when a command should be restricted to one exact origin. The existing Python and MATLAB interfaces remain compatible with `-sa browser`, normal `-j`, progress, cancellation, and the finite communication timeout.
 
 The in-page simulation uses the bundled Stone (200×200 continuous) or Strebelle (250×250 categorical) training image and the compiled QS Wasm worker. Each run generates a new random seed and creates a destination with the selected training image's original dimensions. It does not contact the G2S server.
+
+When a host does not provide cross-origin isolation, the page runs the single-thread compatibility bundle and displays a button linking to `https://mps-online.mathieu-1cc.workers.dev/` for the multithreaded version.
 
 ## Cloudflare Pages
 
@@ -38,11 +40,13 @@ Cloudflare's newer Git setup may open a “Set up your application” screen wit
 
 - project name: `mps-online`
 - build command: leave empty
-- deploy command: `npx wrangler deploy --assets ./public/`
+- deploy command: `npx wrangler deploy --assets ./public/ --compatibility-date 2026-07-24`
 - builds for non-production branches: disabled initially
 - advanced path: `/`
 - environment variables: none
 
 Workers Static Assets parses the included `public/_headers` file, so the threaded Wasm build receives the same COOP/COEP headers without a Worker script or service-worker workaround.
+
+If the package contents are placed directly at the repository root instead, use `npx wrangler deploy --assets ./ --compatibility-date 2026-07-24`.
 
 Keep only one preview tab active when using Python or MATLAB; the page now warns and stands down in duplicate tabs so one command cannot be claimed twice.
